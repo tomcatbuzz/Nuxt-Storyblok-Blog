@@ -50,14 +50,14 @@ module.exports = {
       'storyblok-nuxt',
       {
         accessToken: process.env.NODE_ENV == 'production'
-          ? 'gc4hYmOLpo0KHWuXFr6GVwtt'
-          : '5Grb7oSQEyhlRAZDGgQ0Ngtt', cacheProvider: 'memory'}
+          ? 'ADD YOUR STORYBLOK API PUBLIC TOKEN HERE'
+          : 'ADD YOUR STORYBLOK API PREVIEW TOKEN HERE', cacheProvider: 'memory'}
     ]
   ],
 
   generate: {
     routes: function() {
-      return axios.get('https://api.storyblok.com/v1/cdn/stories?version=published&token=gc4hYmOLpo0KHWuXFr6GVwtt&starts_with=blog&cv=' + Math.floor(Date.now() / 1e3)
+      return axios.get('https://api.storyblok.com/v1/cdn/stories?version=published&token=ADD YOUR STORYBLOK API PUBLIC TOKEN HERE&starts_with=blog&cv=' + Math.floor(Date.now() / 1e3)
       )
       .then(res => {
         const blogPosts = res.data.stories.map(bp => bp.full_slug)
