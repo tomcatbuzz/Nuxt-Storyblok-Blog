@@ -1,81 +1,61 @@
 <template>
-  <v-app dark>
-    <v-navigation-drawer
-      :mini-variant="miniVariant"
-      :clipped="clipped"
-      v-model="drawer"
-      fixed
+  <v-app light>
+  <div class="hide-overflow" style="position: relative;">
+    <v-toolbar
       app
-    >
-      <v-list>
-        <v-list-tile
-          router
-          :to="item.to"
-          :key="i"
-          v-for="(item, i) in items"
-          exact
-        >
-          <v-list-tile-action>
-            <v-icon v-html="item.icon"></v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title v-text="item.title"></v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-      </v-list>
-    </v-navigation-drawer>
-    <v-toolbar fixed app :clipped-left="clipped">
-      <v-toolbar-side-icon @click="drawer = !drawer"></v-toolbar-side-icon>
-      <v-btn
-        icon
-        @click.stop="miniVariant = !miniVariant"
-      >
-        <v-icon v-html="miniVariant ? 'chevron_right' : 'chevron_left'"></v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        @click.stop="clipped = !clipped"
-      >
-        <v-icon>web</v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        @click.stop="fixed = !fixed"
-      >
-        <v-icon>remove</v-icon>
-      </v-btn>
-      <v-toolbar-title v-text="title"></v-toolbar-title>
+      absolute
+      color="primary"
+      scroll-off-screen
+      scroll-target="#scrolling-techniques">
+      <v-toolbar-side-icon @click="drawer = !drawer" class="hidden-sm-and-up"></v-toolbar-side-icon>
+      <v-toolbar-title>
+        <nuxt-link to="/" tag="span" style="cursor: pointer">Nuxt Storyblok Blog</nuxt-link>
+      </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn
-        icon
-        @click.stop="rightDrawer = !rightDrawer"
-      >
-        <v-icon>menu</v-icon>
-      </v-btn>
+      <v-toolbar-items class="hidden-xs-only">
+        <v-btn flat
+          v-for="item in menuItems"
+          :key="item.title"
+          :to="item.link">
+        <v-icon left dark>{{ item.icon }}</v-icon>
+        {{ item.title }}
+        </v-btn>
+      </v-toolbar-items>
     </v-toolbar>
-    <v-content>
-      <v-container>
+    <div
+      id="scrolling-techniques"
+      class="scroll-y"
+      style="max-height: 600px;">
+      <v-content>
+      <v-container style="height: 100%;">
         <nuxt />
       </v-container>
-    </v-content>
-    <v-navigation-drawer
-      temporary
-      :right="right"
-      v-model="rightDrawer"
-      fixed
-    >
+      </v-content>
+      </div>
+    </div>
+      <v-navigation-drawer
+       absolute
+       temporary
+       v-model="drawer">
       <v-list>
-        <v-list-tile @click.native="right = !right">
+        <v-list-tile>
+          <v-list-tile-title class="text-xs-center">Nuxt Storyblok Blog</v-list-tile-title>
+        </v-list-tile>
+        <v-divider dark></v-divider>
+        <v-list-tile
+          v-for="item in menuItems"
+          :key="item.title"
+          :to="item.link">
           <v-list-tile-action>
-            <v-icon light>compare_arrows</v-icon>
+            <v-icon>{{ item.icon }}</v-icon>
           </v-list-tile-action>
-          <v-list-tile-title>Switch drawer (click me)</v-list-tile-title>
+          <v-list-tile-content>{{ item.title }}</v-list-tile-content>
         </v-list-tile>
       </v-list>
-    </v-navigation-drawer>
-    <v-footer :fixed="fixed" app>
-      <span>&copy; 2017</span>
-    </v-footer>
+      </v-navigation-drawer>
+      <v-footer :fixed="fixed" app>
+        <span>&copy; 2018</span>
+      </v-footer>
   </v-app>
 </template>
 
@@ -83,18 +63,22 @@
   export default {
     data() {
       return {
-        clipped: false,
-        drawer: true,
-        fixed: false,
-        items: [
-          { icon: 'apps', title: 'Welcome', to: '/' },
-          { icon: 'bubble_chart', title: 'Inspire', to: '/inspire' }
-        ],
-        miniVariant: false,
-        right: true,
-        rightDrawer: false,
-        title: 'Vuetify.js'
+        drawer: false,
+        fixed: false
+      }
+    },
+    computed: {
+      menuItems () {
+        let menuItems = [
+          { icon: 'bubble_chart', title: 'Home', link: '/' },
+          { icon: 'apps', title: 'About', link: '/about' },
+        ]
+        return menuItems
       }
     }
   }
 </script>
+
+
+
+

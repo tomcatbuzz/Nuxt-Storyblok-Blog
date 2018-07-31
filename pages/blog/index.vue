@@ -5,8 +5,8 @@
       :key="post.id"
       :title="post.title"
       :exerpt="post.previewText"
-      :thumbnailImage="post.thumbnailUrl"
       :content="post.content"
+      :thumbnailImage="post.thumbnailUrl"
       :id="post.id" />
   </v-container>
 </template>
