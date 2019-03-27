@@ -71,7 +71,7 @@
       menuItems () {
         let menuItems = [
           { icon: 'bubble_chart', title: 'Home', link: '/' },
-          { icon: 'apps', title: 'About', link: '/about' },
+          { icon: 'apps', title: 'About', link: '/about' }
         ]
         return menuItems
       }
