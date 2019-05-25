@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.4.1",
-    "nuxt": "^2.5.1",
+    "nuxt": "^2.7.1",
     "storyblok-nuxt": "0.0.6",
     "vuetify": "^1.0.19"
   },
